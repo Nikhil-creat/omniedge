@@ -124,6 +124,36 @@ export default function App() {
         </section>
       </main>
 
+      <footer className="border-t border-panelline px-6 py-4 text-center">
+        <p className="text-xs text-mist">
+          Built by{" "}
+          <a
+            href="https://github.com/Nikhil-creat"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-signal hover:underline"
+          >
+            NIKHIL CHARY SRIRAMOJU
+          </a>
+          {" · "}
+          <a
+            href="https://in.linkedin.com/in/nikhil-chary-sriramoju-95041b38a"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pulse hover:underline"
+          >
+            LinkedIn
+          </a>
+          {" · "}
+          <a
+            href="mailto:sriramojunikhil66@gmail.com"
+            className="text-mist hover:text-slate-100 hover:underline"
+          >
+            sriramojunikhil66@gmail.com
+          </a>
+        </p>
+      </footer>
+
       <CopilotDrawer
         apiBaseUrl={API_BASE_URL}
         open={copilotOpen}
