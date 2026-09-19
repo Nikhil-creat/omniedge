@@ -1,0 +1,34 @@
+name: Chaos Engineering Self-Healing Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "chaos/**"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "chaos/**"
+  workflow_dispatch: {}
+
+jobs:
+  chaos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: pip install -r requirements.txt
+
+      - name: Run in-process chaos suite
+        working-directory: chaos
+        env:
+          OMNIEDGE_PQC_BACKEND: simulated
+        run: python chaos_runner.py --mode inprocess --rounds 5 --seed ${{ github.run_number }}

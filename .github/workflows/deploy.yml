@@ -1,0 +1,65 @@
+name: Deploy OmniEdge Dashboard to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Uses `npm install` rather than `npm ci` so the workflow doesn't
+      # require a committed package-lock.json. Once you commit a
+      # lockfile, switch this to `npm ci` and add `cache: npm` above
+      # for faster, reproducible builds.
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build static bundle
+        env:
+          # The repo name becomes the GitHub Pages subpath (see vite.config.js)
+          OMNIEDGE_REPO_NAME: ${{ github.event.repository.name }}
+          VITE_OMNIEDGE_API_URL: ${{ vars.VITE_OMNIEDGE_API_URL }}
+          VITE_OMNIEDGE_WS_URL: ${{ vars.VITE_OMNIEDGE_WS_URL }}
+          VITE_OMNIEDGE_NODE_ID: ${{ vars.VITE_OMNIEDGE_NODE_ID }}
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

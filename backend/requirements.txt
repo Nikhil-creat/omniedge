@@ -1,0 +1,40 @@
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.8.0
+cryptography>=43.0.0
+networkx>=3.3
+numpy>=1.26.0
+
+# Optional — real post-quantum crypto (Kyber/Dilithium). Falls back to a
+# clearly-labeled simulated backend automatically if not installed.
+# liboqs-python>=0.10.0
+
+# Optional — real GNN backend (torch_geometric). Falls back to a
+# pure-NumPy message-passing implementation automatically if not installed.
+# torch>=2.3.0
+# torch_geometric>=2.5.0
+
+# Optional — real TPM 2.0 hardware access (replaces SimulatedTPM).
+# tpm2-pytss>=2.3.0
+
+# --- Agentic AI / RAG / CNN (app/ai/) --------------------------------------
+
+# Optional — real Claude tool-calling agentic loop for the copilot.
+# Falls back to Groq, then to a deterministic rule-based planner,
+# automatically if not installed or ANTHROPIC_API_KEY isn't set.
+# anthropic>=0.34.0
+
+# Optional — Groq tool-calling agentic loop (free tier, no card
+# required: https://console.groq.com). Good no-cost fallback/primary
+# LLM backend for the copilot if you don't have an Anthropic key.
+# groq>=0.11.0
+
+# Optional — real dense-embedding RAG retrieval. Falls back to a
+# dependency-free TF-IDF + cosine-similarity retriever automatically if
+# not installed.
+# sentence-transformers>=3.0.0
+
+# Optional — real torch CNN backend for edge vision inference. Falls
+# back to a pure-NumPy conv2d/maxpool/FC forward pass automatically if
+# not installed.
+# torch>=2.3.0
