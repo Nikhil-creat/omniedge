@@ -184,3 +184,15 @@ Every module above was actually executed and its behavior verified
 (PQC session agreement, AEAD round-trip, TPM admission, anomaly
 scoring, and — most importantly — live self-healing reroute on
 simulated node failure) before being handed to you.
+
+## 👤 About the Builder
+
+**NIKHIL CHARY SRIRAMOJU**
+B.Tech Final Year — Computer Science & Engineering
+
+- 🔗 LinkedIn: [nikhil-chary-sriramoju](https://in.linkedin.com/in/nikhil-chary-sriramoju-95041b38a)
+- 💻 GitHub: [Nikhil-creat](https://github.com/Nikhil-creat)
+- 📧 Email: sriramojunikhil66@gmail.com
+- 📸 Instagram: [nikhil__sriramoju](https://www.instagram.com/nikhil__sriramoju)
+
+  
